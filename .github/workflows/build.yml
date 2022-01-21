@@ -1,6 +1,14 @@
 name: Build Unity Project
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - 'art'
+      - 'music'
+  pull_request:
+    branches-ignore:
+      - 'art'
+      - 'music'
 
 jobs:
   build:
