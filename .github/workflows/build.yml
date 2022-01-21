@@ -2,18 +2,23 @@ name: Build Unity Project
 
 on:
   push:
-    branches-ignore:
-      - 'art'
-      - 'music'
-  pull_request:
-    branches-ignore:
-      - 'art'
-      - 'music'
+    branches:
+      - 'main'
+      - '!art'
+      - '!music'
 
 jobs:
   build:
     name: Build the game
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - WebGL
+          - StandaloneOSX
+          - StandaloneWindows64
+          - StandaloneLinux64
     steps:
       # Checkout
       - name: Checkout repository
@@ -25,17 +30,16 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: Library-
 
       # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Run tests
+      #   uses: game-ci/unity-test-runner@v2
+      #   env:
+      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      #   with:
+      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Build
       - name: Build project
@@ -43,10 +47,11 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: WebGL
+          targetPlatform: ${{ matrix.targetPlatform }}
+          versioning: Semantic
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
