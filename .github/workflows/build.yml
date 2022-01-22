@@ -20,14 +20,13 @@ jobs:
           - StandaloneWindows64
           - StandaloneLinux64
     steps:
-      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           lfs: true
 
-      # Cache
-      - uses: actions/cache@v2
+      - name: Load cache
+        uses: actions/cache@v2
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
@@ -41,7 +40,6 @@ jobs:
       #   with:
       #     githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
@@ -50,8 +48,17 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Semantic
 
-      # Output
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+
+      # - name: Publish to itch.io
+      #   uses: josephbmanley/butler-publish-itchio-action@master
+      #   env:
+      #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+      #     CHANNEL: WebGL
+      #     ITCH_GAME: parasync
+      #     ITCH_USER: DevKoala
+      #     PACKAGE: build/WebGL
