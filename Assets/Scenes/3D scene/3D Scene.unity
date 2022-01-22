@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Movement
       objectReference: {fileID: 0}
+    - target: {fileID: 6441335715676990177, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6441335715676990183, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
       propertyPath: m_RootOrder
       value: 3
