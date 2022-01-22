@@ -9,9 +9,13 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float speed = 5;
 
+    private Vector3 position = new Vector3(0, 0, 0);
+    private bool right = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        position = transform.position;
     }
 
     private void Update()
@@ -21,20 +25,41 @@ public class Movement : MonoBehaviour
 
     public void OnUp()
     {
-        transform.position += new Vector3(0, 0, speed);
+        position += new Vector3(0, 0, speed);
+        Tween(true);
     }
     public void OnDown()
     {
-        transform.position += new Vector3(0, 0, -speed);
+        position += new Vector3(0, 0, -speed);
+        Tween(false);
     }
     public void OnLeft()
     {
-        transform.position += new Vector3(-speed, 0, 0);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        position += new Vector3(-speed, 0, 0);
+
+        Tween(false);
     }
     public void OnRight()
     {
-        transform.position += new Vector3(speed, 0, 0);
-        transform.rotation = Quaternion.Euler(0, -180, 0);
+        position += new Vector3(speed, 0, 0);
+        Tween(true);
+    }
+    private void Tween(bool toRight)
+    {
+        float time = .2f;
+        if (!right && toRight) {
+            right = true;
+            transform.DORotate(new Vector3(0, -90, 0), time).SetEase(Ease.InQuad);
+            transform.DOScale(new Vector3(1, 1, 1), 0).SetDelay(time);
+            transform.DORotate(new Vector3(0, 90, 0), 0).SetDelay(time).SetEase(Ease.OutQuad);
+            transform.DORotate(new Vector3(0, 0, 0), time).SetDelay(time);
+        } else if(right && !toRight) {
+            right = false;
+            transform.DORotate(new Vector3(0, -90, 0), time).SetEase(Ease.InQuad);
+            transform.DOScale(new Vector3(-1, 1, 1), 0).SetDelay(time);
+            transform.DORotate(new Vector3(0, 90, 0), 0).SetDelay(time).SetEase(Ease.OutQuad);
+            transform.DORotate(new Vector3(0, 0, 0), time).SetDelay(time);
+        }
+        transform.DOMove(position, .15f);
     }
 }
