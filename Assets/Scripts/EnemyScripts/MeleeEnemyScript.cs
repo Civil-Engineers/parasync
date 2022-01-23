@@ -7,6 +7,7 @@ public class MeleeEnemyScript : MonoBehaviour
 {
     public Timer timerObject;
     public PlayerMove playerObject;
+    [SerializeField] private GameObject attackIndicators;
     [SerializeField] private Transform sprite;
     [SerializeField] private int speed = 1;
     [SerializeField] private GameObject enemyObject;
