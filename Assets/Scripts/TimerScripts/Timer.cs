@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class Timer : MonoBehaviour
 {   
+    private const float maxSeconds = 5.00f;
     [SerializeField] private float secondsRemaining = 5.00f;
     public bool IsTimerRunning = true;
 
-    public TextMeshProUGUI TextField;
+    public Image timer;
+    public InputReader inputReader;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,20 +22,23 @@ public class Timer : MonoBehaviour
     {
         if(IsTimerRunning) {
             
-            if(secondsRemaining > 0) {
+            if(secondsRemaining >= 0) {
                 secondsRemaining -= Time.deltaTime;
-                double displayTime = System.Math.Round(secondsRemaining, 2);
-                TextField.text = displayTime.ToString() + " seconds";
+                timer.fillAmount = secondsRemaining / maxSeconds;
             }
             else {
                 secondsRemaining = 0.00f;
                 IsTimerRunning = false;
-                TextField.text = secondsRemaining + " seconds";
+                inputReader.ResetPlayerMove();
             }
         } 
     }
 
     void DisplaySeconds(float secondsToDisplay) {
         float seconds = Mathf.FloorToInt(secondsToDisplay % 60);
+    }
+
+    public void ResetTime() {
+        secondsRemaining = 5.00f;
     }
 }
