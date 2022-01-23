@@ -6,7 +6,7 @@ public class EnemyScript : MonoBehaviour
 {
     public Timer timerObject;
     public int speed = 1;
-    public Movement playerObj;
+    public PlayerMove playerObj;
     // Start is called before the first frame update
     void Start()
     {
