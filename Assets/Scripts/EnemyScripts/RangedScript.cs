@@ -41,7 +41,7 @@ public class RangedScript : MonoBehaviour {
 
             float[] magArray = new float[] { magnitudeUp, magnitudeDown, magnitudeLeft, magnitudeRight };
             float maxMag = Mathf.Max(magArray);
-            
+                
             Debug.Log(maxMag);
             if(maxMag == magnitudeUp) { 
                 Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
