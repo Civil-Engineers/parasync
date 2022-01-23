@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5893658580947925133, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1178474
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5893658580947925133, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.3343148
+      value: 3.333
       objectReference: {fileID: 0}
     - target: {fileID: 5893658580947925133, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.184
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5893658580947925133, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
       propertyPath: m_LocalRotation.w
@@ -61,6 +61,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
+--- !u!4 &6584769331462466836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5893658580947925133, guid: 161983ddd4832b143a57443d0cddad78, type: 3}
+  m_PrefabInstance: {fileID: 768909995354985881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4831352878165384049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,7 +75,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 838288131, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 18
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 838288131, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
       propertyPath: m_ActionEvents.Array.data[10].m_ActionId
@@ -172,6 +177,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3029485628162924484, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 6584769331462466836}
     - target: {fileID: 6441335715676990176, guid: ab45211390df24e4ca446af5c82d7cfa, type: 3}
       propertyPath: m_Name
       value: Movement Variant
