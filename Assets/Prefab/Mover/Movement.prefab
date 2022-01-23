@@ -152,7 +152,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2285582021622920694}
+      - m_Target: {fileID: 6680084429471329927, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
         m_TargetAssemblyTypeName: Attack, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
@@ -164,11 +164,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c665ad9c-6de3-4bb8-9e38-fb15b1e479f4
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionId: ed68606c-975b-46c7-86f1-9bbbb54fa95f
+    m_ActionName: Player/Attack[/Keyboard/leftShift,/Keyboard/rightShift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3029485628162924484}
+      - m_Target: {fileID: 7567891224537236661, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
         m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -180,10 +180,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: ed68606c-975b-46c7-86f1-9bbbb54fa95f
-    m_ActionName: Player/Attack[/Keyboard/leftShift,/Keyboard/rightShift]
+    m_ActionId: 8b41e850-1f6a-43f4-a25c-7d5d23252a2f
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b0a21daa-ed2d-4a08-b687-083a35d348b3
+    m_ActionName: Player/Look
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0385cd32-7ff5-4729-b336-2a5efbc84e98
+    m_ActionName: Player/Fire
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04fe43dd-ca2d-40d3-9605-00f422a93991
+    m_ActionName: Player/Up
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab231b4a-9c4f-40aa-820c-9faec82df44a
+    m_ActionName: Player/Down
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d6b453ac-9002-4386-bc45-852cc4be329e
+    m_ActionName: Player/Left
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 65c70f81-4b02-4f8a-8596-b9c14bede898
+    m_ActionName: Player/Right
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
