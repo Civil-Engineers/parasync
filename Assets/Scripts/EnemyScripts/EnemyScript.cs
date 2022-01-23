@@ -29,37 +29,41 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!timerObject.isTimerRunning) {
-            float currX = enemyObject.transform.position.x;
-            float currZ = enemyObject.transform.position.z;
-            Vector3 upDir = new Vector3(currX, 0, currZ + 1); 
-            Vector3 downDir = new Vector3(currX, 0, currZ - 1); 
-            Vector3 leftDir = new Vector3(currX - 1, 0, currZ); 
-            Vector3 rightDir = new Vector3(currX + 1, 0, currZ); 
+        if (!timerObject.isTimerRunning) {
+            if (timerObject.currIterations == 0)
+            {
+                float currX = enemyObject.transform.position.x;
+                float currZ = enemyObject.transform.position.z;
+                Vector3 upDir = new Vector3(currX, 0, currZ + 1); 
+                Vector3 downDir = new Vector3(currX, 0, currZ - 1); 
+                Vector3 leftDir = new Vector3(currX - 1, 0, currZ); 
+                Vector3 rightDir = new Vector3(currX + 1, 0, currZ); 
 
-            float magnitudeUp = (playerObject.transform.position - upDir).magnitude;
-            float magnitudeDown = (playerObject.transform.position - downDir).magnitude;
-            float magnitudeLeft = (playerObject.transform.position - leftDir).magnitude;
-            float magnitudeRight = (playerObject.transform.position - rightDir).magnitude;
+                float magnitudeUp = (playerObject.transform.position - upDir).magnitude;
+                float magnitudeDown = (playerObject.transform.position - downDir).magnitude;
+                float magnitudeLeft = (playerObject.transform.position - leftDir).magnitude;
+                float magnitudeRight = (playerObject.transform.position - rightDir).magnitude;
 
-            float[] magArray = new float[] { magnitudeUp, magnitudeDown, magnitudeLeft, magnitudeRight };
-            float minMag = Mathf.Min(magArray);
+                float[] magArray = new float[] { magnitudeUp, magnitudeDown, magnitudeLeft, magnitudeRight };
+                float minMag = Mathf.Min(magArray);
             
-            if (minMag == magnitudeUp) { 
-                Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Forward"].faceRight);
-            }
-            else if (minMag == magnitudeDown) {  
-                Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Backward"].faceRight);
-            }
-            else if (minMag == magnitudeRight) {  
-                Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Right"].faceRight);
-            }
-            else if (minMag == magnitudeLeft) {
-                Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Left"].faceRight);
+                if (minMag == magnitudeUp) { 
+                    Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
+                    Tween(newPos, _enemyActions["Move Forward"].faceRight);
+                }
+                else if (minMag == magnitudeDown) {  
+                    Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
+                    Tween(newPos, _enemyActions["Move Backward"].faceRight);
+                }
+                else if (minMag == magnitudeRight) {  
+                    Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
+                    Tween(newPos, _enemyActions["Move Right"].faceRight);
+                }
+                else if (minMag == magnitudeLeft) {
+                    Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
+                    Tween(newPos, _enemyActions["Move Left"].faceRight);
+                }
+                timerObject.ResetIterations();
             }
             timerObject.isTimerRunning = true;
             timerObject.ResetTime();

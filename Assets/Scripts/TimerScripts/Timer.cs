@@ -11,34 +11,44 @@ public class Timer : MonoBehaviour
     [SerializeField] private InputReader inputReader;
 
     [HideInInspector] public bool isTimerRunning = true;
+    [HideInInspector] public int maxIterations = 2;
+    [HideInInspector] public int currIterations;
 
     private float _maxTime;
-    private float _timeRemaining;
+    [HideInInspector] public float timeRemaining;
 
     // Start is called before the first frame update
     void Start()
     {
        _maxTime = turnTimeInSeconds;
-       _timeRemaining = turnTimeInSeconds;
+       timeRemaining = turnTimeInSeconds;
+       currIterations = maxIterations;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (isTimerRunning) {
-            if (_timeRemaining >= 0) {
-                _timeRemaining -= Time.deltaTime;
-                timerImage.fillAmount = _timeRemaining / _maxTime;
+            if (timeRemaining >= 0) {
+                timeRemaining -= Time.deltaTime;
+                timerImage.fillAmount = timeRemaining / _maxTime;
             }
             else {
-                _timeRemaining = 0.00f;
+                timeRemaining = 0.00f;
                 isTimerRunning = false;
                 inputReader.ResetPlayerMove();
+                --currIterations;
             }
         } 
     }
 
-    public void ResetTime() {
-        _timeRemaining = turnTimeInSeconds;
+    public void ResetTime()
+    {
+        timeRemaining = turnTimeInSeconds;
+    }
+
+    public void ResetIterations()
+    {
+        currIterations = maxIterations;
     }
 }
