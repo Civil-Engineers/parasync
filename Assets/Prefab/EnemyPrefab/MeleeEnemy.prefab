@@ -109,7 +109,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997005197360616783, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
       propertyPath: m_Name
-      value: Enemy Movement
+      value: MeleeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997005197360616783, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1131834087502127211, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
