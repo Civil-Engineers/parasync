@@ -275,6 +275,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1902860371097383319, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6584769331462466836, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -376,17 +380,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!114 &478111862 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1902860371097383312, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
-  m_PrefabInstance: {fileID: 196395774}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28318ef734265604793cbe8c17b2036e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1346180817
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +564,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1640059752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8997005197360616783, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+  m_PrefabInstance: {fileID: 321045515648088562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1789616917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5619655701889739976, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
@@ -580,6 +578,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f4b4b9c40a870259a467484de39764f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1896904644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7567891224537236661, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
+  m_PrefabInstance: {fileID: 196395774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a427c478574f048449603962c9a4441a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &321045515648088562
@@ -592,11 +601,35 @@ PrefabInstance:
     - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
       propertyPath: playerObj
       value: 
-      objectReference: {fileID: 478111862}
+      objectReference: {fileID: 1896904644}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 1640059752}
     - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
       propertyPath: timerObject
       value: 
       objectReference: {fileID: 1789616917}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: actions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: actions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 75e4f732eb8da764cb75415ea07b8550, type: 2}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: actions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: actions.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
+    - target: {fileID: 1835298792, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
+      propertyPath: actions.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}
     - target: {fileID: 4454716655512865226, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -657,7 +690,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Movement
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1131834087502127211, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
 --- !u!1001 &5965169804099480934
 PrefabInstance:
