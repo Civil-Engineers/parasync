@@ -12,6 +12,8 @@ public class AttackBox : MonoBehaviour
 
     [SerializeField] private RectTransform center;
 
+    public bool flipped = false;
+
     Vector2 imageInitLoc;
 
     void Start()
@@ -42,10 +44,11 @@ public class AttackBox : MonoBehaviour
                 angle = 180;
                 break;
             case Direction.Left:
-                angle = -90;
+
+                angle = 90;
                 break;
             case Direction.Right:
-                angle = 90;
+                angle = -90;
                 break;
         }
         image.DORotate(new Vector3(0, 0, angle), .2f);

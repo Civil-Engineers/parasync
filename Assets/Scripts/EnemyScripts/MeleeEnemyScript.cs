@@ -6,7 +6,7 @@ using DG.Tweening;
 public class MeleeEnemyScript : MonoBehaviour
 {
     public Timer timerObject;
-    public PlayerMove playerObject;
+    public GameObject playerObject;
     [SerializeField] private GameObject attackIndicator;
     [SerializeField] private Transform sprite;
     [SerializeField] private int speed = 2;
@@ -45,7 +45,6 @@ public class MeleeEnemyScript : MonoBehaviour
             float minMag = Mathf.Min(magArray);
             
             Vector3 newPos = new Vector3();
-            Debug.Log(minMag);
             if(minMag == magnitudeUp) { 
                 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Forward"].faceRight);
@@ -77,9 +76,6 @@ public class MeleeEnemyScript : MonoBehaviour
             Instantiate(attackIndicator, downDir, Quaternion.identity);
             Instantiate(attackIndicator, leftDir, Quaternion.identity);
             Instantiate(attackIndicator, rightDir, Quaternion.identity);
-
-            timerObject.isTimerRunning = true;
-            timerObject.ResetTime();
         }   
     }
 

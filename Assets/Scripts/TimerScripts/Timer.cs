@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private InputReader inputReader;
 
     [HideInInspector] public bool isTimerRunning = true;
-    [HideInInspector] public int maxIterations = 2;
+    [SerializeField] private int maxIterations = 4;
     [HideInInspector] public int currIterations;
 
     private float _maxTime;
@@ -43,15 +43,17 @@ public class Timer : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 timerImage.fillAmount = timeRemaining / _maxTime;
             }
-            else
-            {
-                timeRemaining = 0.00f;
-                isTimerRunning = false;
+            else {
+                timeRemaining = 0;
+
                 inputReader.ResetPlayerMove();
-                --currIterations;
+                currIterations--;
+                Debug.Log("currIterations: " + currIterations);
                 GameObject[] attackMarkers = GameObject.FindGameObjectsWithTag("Respawn");
                 foreach(GameObject marker in attackMarkers) {
                     GameObject.Destroy(marker);
+                }
+                isTimerRunning = false;
             }
         }
     }
@@ -64,5 +66,9 @@ public class Timer : MonoBehaviour
     public void ResetIterations()
     {
         currIterations = maxIterations;
+    }
+
+    public float getStartingTime() {
+        return turnTimeInSeconds;
     }
 }

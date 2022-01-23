@@ -18,10 +18,10 @@ public class InputReader : MonoBehaviour
     [SerializeField] private AttackBox a;
 
 
-    public void StartQueue(int index) {
+    public void StartQueue(int index, float startingTime) {
         player1[index].StartQueue();
         player2[index].StartQueue();
-        actionIndex = 0;
+        actionIndex = index;
     }
 
     public void Register(Player player, AttackBox.Direction direction) {

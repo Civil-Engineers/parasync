@@ -19,6 +19,9 @@ public class PlayerActionManager : MonoBehaviour
     private List<string> _p1KeyPresses, _p2KeyPresses;
     private string _p1Key = null, _p2Key = null;
 
+    private int currentActionIndex = 0;
+
+    private bool isTimerRunnningBefore = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,16 +38,21 @@ public class PlayerActionManager : MonoBehaviour
             _p1MoveActions.Add(p1Actions, action);
             _p2MoveActions.Add(p2Actions, action);
         }
+
+        inputReader.StartQueue(0, timer.getStartingTime());
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (!timer.isTimerRunning)
         {
-            Debug.Log(_p1Key + " " + _p2Key);
             _p1KeyPresses.Add(_p1Key);
             _p2KeyPresses.Add(_p2Key);
+
+            inputReader.StartQueue(_p2KeyPresses.Count, timer.getStartingTime());
+
 
             _p1Key = null;
             _p2Key = null;
@@ -52,28 +60,28 @@ public class PlayerActionManager : MonoBehaviour
 
         if (timer.currIterations == 0)
         {
-            Debug.Log("Completed entire sequence");
-            string p1Keys = string.Join(",", _p1KeyPresses);
-            string p2Keys = string.Join(",", _p2KeyPresses);
-            Debug.Log("P1: " + p1Keys);
-            Debug.Log("P2: " + p2Keys);
+            Debug.Log("_p1KeyPresses: "+_p1KeyPresses.Count);
+            // string p1Keys = string.Join(",", _p1KeyPresses);
+            // string p2Keys = string.Join(",", _p2KeyPresses);
+            // for (int i = 0; i < _p1KeyPresses.Count; i++)
+            // {
+            //     string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
 
-            for (int i = 0; i < _p1KeyPresses.Count; i++)
-            {
-                string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
-
-                if (key1 != null && key2 != null)
-                {
-                    if (_p1MoveActions.ContainsKey(key1))
-                        Debug.Log("Execute " + key1);
-                    if (_p2MoveActions.ContainsKey(key2))
-                        Debug.Log("Execute " + key2);
-                }
-                else Debug.Log("One player forgot to enter an action! Not executing...");
-            }
+            //     if (key1 != null && key2 != null)
+            //     {
+            //         // if (_p1MoveActions.ContainsKey(key1))
+            //         //     //Debug.Log("Execute " + key1);
+            //         // if (_p2MoveActions.ContainsKey(key2))
+            //         //     //Debug.Log("Execute " + key2);
+            //     }
+            //     //else Debug.Log("One player forgot to enter an action! Not executing...");
+            // }
 
             _p1KeyPresses.Clear();
             _p2KeyPresses.Clear();
+            
+
+            inputReader.StartQueue(0, timer.getStartingTime());
         }
     }
 
@@ -83,10 +91,46 @@ public class PlayerActionManager : MonoBehaviour
 
         if (context.action.triggered)
         {
-            if (_p1MoveActions.ContainsKey(ctrlName))
+            if (_p1MoveActions.ContainsKey(ctrlName)) {
                 _p1Key = ctrlName;
-            if (_p2MoveActions.ContainsKey(ctrlName))
+                AttackBox.Direction dir = AttackBox.Direction.Up;
+                switch(_p1Key) {
+                    case "W":
+                        dir = AttackBox.Direction.Up;
+                        break;
+                    case "A":
+                        dir = AttackBox.Direction.Left;
+                        break;
+                    case "S":
+                        dir = AttackBox.Direction.Down;
+                        break;
+                    case "D":
+                        dir = AttackBox.Direction.Right;
+                        break;
+                }
+                inputReader.Register(InputReader.Player.player1, dir);
+            }
+                
+            if (_p2MoveActions.ContainsKey(ctrlName)) {
                 _p2Key = ctrlName;
+                AttackBox.Direction dir = AttackBox.Direction.Up;
+                switch(_p2Key) {
+                    case "Up":
+                        dir = AttackBox.Direction.Up;
+                        break;
+                    case "Left":
+                        dir = AttackBox.Direction.Left;
+                        break;
+                    case "Down":
+                        dir = AttackBox.Direction.Down;
+                        break;
+                    case "Right":
+                        dir = AttackBox.Direction.Right;
+                        break;
+                }
+                inputReader.Register(InputReader.Player.player2, dir);
+            }
+
         }
     }
 }
