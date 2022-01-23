@@ -5,17 +5,19 @@ using DG.Tweening;
 
 public class EnemyScript : MonoBehaviour
 {
-    public Timer timerObject;
-    public PlayerMove playerObject;
-    [SerializeField] private Transform sprite;
-    [SerializeField] private int speed = 1;
     [SerializeField] private GameObject enemyObject;
-    // Start is called before the first frame update
+    [SerializeField] private Transform sprite;
+    [SerializeField] private GameObject playerObject;
+    [SerializeField] private Timer timerObject;
+    [SerializeField] private int speed = 1;
+
     [SerializeField] private MovementAction[] actions;
 
     private Dictionary<string, MovementAction> _enemyActions;
 
     private bool _isFacingRight = true;
+    
+    // Start is called before the first frame update
     void Start()
     {
         _enemyActions = new Dictionary<string, MovementAction>();
@@ -43,24 +45,21 @@ public class EnemyScript : MonoBehaviour
             float[] magArray = new float[] { magnitudeUp, magnitudeDown, magnitudeLeft, magnitudeRight };
             float minMag = Mathf.Min(magArray);
             
-            Debug.Log(minMag);
-            if(minMag == magnitudeUp) { 
+            if (minMag == magnitudeUp) { 
                 Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Forward"].faceRight);
             }
-            else if(minMag == magnitudeDown) {  
+            else if (minMag == magnitudeDown) {  
                 Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Backward"].faceRight);
             }
-            else if(minMag == magnitudeRight) {  
+            else if (minMag == magnitudeRight) {  
                 Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Right"].faceRight);
             }
-            else if(minMag == magnitudeLeft) {
+            else if (minMag == magnitudeLeft) {
                 Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Left"].faceRight);
-            } else {
-                Debug.Log("We have a problem dude.");
             }
             timerObject.isTimerRunning = true;
             timerObject.ResetTime();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Attack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     public AttackAction[] actions;
 
