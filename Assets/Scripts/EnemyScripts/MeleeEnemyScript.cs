@@ -44,32 +44,34 @@ public class MeleeEnemyScript : MonoBehaviour
             float[] magArray = new float[] { magnitudeUp, magnitudeDown, magnitudeLeft, magnitudeRight };
             float minMag = Mathf.Min(magArray);
             
+            Vector3 newPos = new Vector3();
             Debug.Log(minMag);
             if(minMag == magnitudeUp) { 
-                Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
+                newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Forward"].faceRight);
             }
             else if(minMag == magnitudeDown) {  
-                Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
+                newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Backward"].faceRight);
             }
             else if(minMag == magnitudeRight) {  
-                Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
+                newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Right"].faceRight);
             }
             else if(minMag == magnitudeLeft) {
-                Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
+                newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
                 Tween(newPos, _enemyActions["Move Left"].faceRight);
             } else {
                 Debug.Log("We have a problem dude.");
             }
-            //Instantiate markers
-            float newX = enemyObject.transform.position.x;
-            float newZ = enemyObject.transform.position.z;
-            Vector3 newUpDir = new Vector3(newX, 0, newZ + speed); 
-            Vector3 newDownDir = new Vector3(newX, 0, newZ - speed); 
-            Vector3 newLeftDir = new Vector3(newX - speed, 0, newZ); 
-            Vector3 newRightDir = new Vector3(newX + speed, 0, newZ); 
+            
+            currX = newPos.x;
+            currZ = newPos.z;
+
+            upDir = new Vector3(currX, 0, currZ + speed); 
+            downDir = new Vector3(currX, 0, currZ - speed); 
+            leftDir = new Vector3(currX + speed, 0, currZ); 
+            rightDir = new Vector3(currX - speed, 0, currZ); 
 
             Instantiate(attackIndicator, upDir, Quaternion.identity);
             Instantiate(attackIndicator, downDir, Quaternion.identity);
