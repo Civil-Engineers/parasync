@@ -7,9 +7,9 @@ public class MeleeEnemyScript : MonoBehaviour
 {
     public Timer timerObject;
     public PlayerMove playerObject;
-    [SerializeField] private GameObject attackIndicators;
+    [SerializeField] private GameObject attackIndicator;
     [SerializeField] private Transform sprite;
-    [SerializeField] private int speed = 1;
+    [SerializeField] private int speed = 2;
     [SerializeField] private GameObject enemyObject;
     // Start is called before the first frame update
     [SerializeField] private MovementAction[] actions;
@@ -31,10 +31,10 @@ public class MeleeEnemyScript : MonoBehaviour
         if(!timerObject.isTimerRunning) {
             float currX = enemyObject.transform.position.x;
             float currZ = enemyObject.transform.position.z;
-            Vector3 upDir = new Vector3(currX, 0, currZ + 1); 
-            Vector3 downDir = new Vector3(currX, 0, currZ - 1); 
-            Vector3 leftDir = new Vector3(currX - 1, 0, currZ); 
-            Vector3 rightDir = new Vector3(currX + 1, 0, currZ); 
+            Vector3 upDir = new Vector3(currX, 0, currZ + speed); 
+            Vector3 downDir = new Vector3(currX, 0, currZ - speed); 
+            Vector3 leftDir = new Vector3(currX - speed, 0, currZ); 
+            Vector3 rightDir = new Vector3(currX + speed, 0, currZ); 
 
             float magnitudeUp = (playerObject.transform.position - upDir).magnitude;
             float magnitudeDown = (playerObject.transform.position - downDir).magnitude;
@@ -63,6 +63,19 @@ public class MeleeEnemyScript : MonoBehaviour
             } else {
                 Debug.Log("We have a problem dude.");
             }
+            //Instantiate markers
+            float newX = enemyObject.transform.position.x;
+            float newZ = enemyObject.transform.position.z;
+            Vector3 newUpDir = new Vector3(newX, 0, newZ + speed); 
+            Vector3 newDownDir = new Vector3(newX, 0, newZ - speed); 
+            Vector3 newLeftDir = new Vector3(newX - speed, 0, newZ); 
+            Vector3 newRightDir = new Vector3(newX + speed, 0, newZ); 
+
+            Instantiate(attackIndicator, upDir, Quaternion.identity);
+            Instantiate(attackIndicator, downDir, Quaternion.identity);
+            Instantiate(attackIndicator, leftDir, Quaternion.identity);
+            Instantiate(attackIndicator, rightDir, Quaternion.identity);
+
             timerObject.isTimerRunning = true;
             timerObject.ResetTime();
         }   

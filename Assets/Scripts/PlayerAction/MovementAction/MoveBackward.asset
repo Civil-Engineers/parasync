@@ -17,7 +17,7 @@ MonoBehaviour:
   - S
   p2Actions:
   - Down
-  moveMagnitude: 1
+  moveMagnitude: 2
   moveDirection: {x: 0, y: -1}
   faceRight: 0
   moveDelayInMs: 250

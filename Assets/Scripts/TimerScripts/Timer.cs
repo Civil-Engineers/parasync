@@ -34,6 +34,10 @@ public class Timer : MonoBehaviour
                 _timeRemaining = 0.00f;
                 isTimerRunning = false;
                 inputReader.ResetPlayerMove();
+                GameObject[] attackMarkers = GameObject.FindGameObjectsWithTag("Respawn");
+                foreach(GameObject marker in attackMarkers) {
+                    GameObject.Destroy(marker);
+                }
             }
         } 
     }
