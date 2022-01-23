@@ -68,6 +68,10 @@ public class Timer : MonoBehaviour
         currIterations = maxIterations;
     }
 
+    public int GetMaxIterations() {
+        return maxIterations;
+    }
+
     public float getStartingTime() {
         return turnTimeInSeconds;
     }

@@ -28,7 +28,8 @@ public class MeleeEnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!timerObject.isTimerRunning) {
+        
+        if(timerObject.currIterations == 0) {
             float currX = enemyObject.transform.position.x;
             float currZ = enemyObject.transform.position.z;
             Vector3 upDir = new Vector3(currX, 0, currZ + speed); 

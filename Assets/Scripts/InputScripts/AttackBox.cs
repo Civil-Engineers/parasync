@@ -90,8 +90,8 @@ public class AttackBox : MonoBehaviour
         progressBg.DOFillAmount(1, staringTime);
     }
 
-    public void Hide()
+    public void Fade()
     {
-
+        image.GetComponent<Image>().DOFade(0, .2f);
     }
 }

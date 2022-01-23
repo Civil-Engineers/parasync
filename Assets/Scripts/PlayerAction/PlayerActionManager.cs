@@ -39,7 +39,9 @@ public class PlayerActionManager : MonoBehaviour
             _p2MoveActions.Add(p2Actions, action);
         }
 
+        inputReader.SetAmount(timer.GetMaxIterations());
         inputReader.StartQueue(0, timer.getStartingTime());
+
     }
 
     // Update is called once per frame
@@ -51,7 +53,10 @@ public class PlayerActionManager : MonoBehaviour
             _p1KeyPresses.Add(_p1Key);
             _p2KeyPresses.Add(_p2Key);
 
-            inputReader.StartQueue(_p2KeyPresses.Count, timer.getStartingTime());
+            if (_p2KeyPresses.Count < timer.GetMaxIterations())
+            {
+                inputReader.StartQueue(_p2KeyPresses.Count, timer.getStartingTime());
+            }
 
 
             _p1Key = null;
@@ -75,7 +80,8 @@ public class PlayerActionManager : MonoBehaviour
             }
 
 
-            for (int i = 0; i < movementList.Count; i++) {
+            for (int i = 0; i < movementList.Count; i++)
+            {
                 MovementAction action = movementList[i];
                 StartCoroutine(MoveCoroutine(i, action, i));
             }
@@ -88,13 +94,19 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
 
-    IEnumerator MoveCoroutine(float delay, MovementAction action, int index) {
+    IEnumerator MoveCoroutine(float delay, MovementAction action, int index)
+    {
 
         yield return new WaitForSeconds(delay);
 
-        if (action != null) {
+        if (action != null)
+        {
             Move(action);
             inputReader.Move(index, GetDirection(action));
+        }
+        else
+        {
+            inputReader.Fade(index);
         }
 
     }
@@ -194,6 +206,7 @@ public class PlayerActionManager : MonoBehaviour
 
     private MovementAction returnCombo(string key1, string key2)
     {
+        Debug.Log(key1+ " " + key2);
         if ((key1 == "W" && key2 == "Left") || (key1 == "A" && key2 == "Up"))
         {
             return _p1MoveActions["Move Top Left"];
@@ -202,11 +215,11 @@ public class PlayerActionManager : MonoBehaviour
         {
             return _p1MoveActions["Move Top Right"];
         }
-        else if ((key1 == "S" && key2 == "Left") || (key1 == "A" && key2 == "Bottom"))
+        else if ((key1 == "S" && key2 == "Left") || (key1 == "A" && key2 == "Down"))
         {
             return _p1MoveActions["Move Bottom Left"];
         }
-        else if ((key1 == "S" && key2 == "Right") || (key1 == "D" && key2 == "Bottom"))
+        else if ((key1 == "S" && key2 == "Right") || (key1 == "D" && key2 == "Down"))
         {
             return _p1MoveActions["Move Bottom Right"];
         }
