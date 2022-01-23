@@ -19,8 +19,8 @@ public class InputReader : MonoBehaviour
 
 
     public void StartQueue(int index, float startingTime) {
-        player1[index].StartQueue();
-        player2[index].StartQueue();
+        player1[index].StartQueue(startingTime);
+        player2[index].StartQueue(startingTime);
         actionIndex = index;
     }
 
@@ -33,9 +33,9 @@ public class InputReader : MonoBehaviour
         }
     }
 
-    public void Move(int index) {
-        player1[index].Move();
-        player2[index].Move();
+    public void Move(int index, AttackBox.Direction direction) {
+        player1[index].Move(direction);
+        player2[index].Move(direction);
     }
 
 
