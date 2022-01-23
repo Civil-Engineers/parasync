@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: MoveTopRight
   m_EditorClassIdentifier: 
   actionName: Move Top Right
-  p1Actions: []
-  p2Actions: []
+  p1Actions:
+  - AS
+  p2Actions:
+  - AS
   moveMagnitude: 2
   moveDirection: {x: 1, y: 1}
   faceRight: 1

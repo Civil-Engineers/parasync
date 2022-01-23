@@ -17,6 +17,7 @@ public class PlayerActionManager : MonoBehaviour
     private Dictionary<string, MovementAction> _p1MoveActions, _p2MoveActions;
     private List<string> _p1KeyPresses, _p2KeyPresses;
     private string _p1Key = null, _p2Key = null;
+    private bool _isFacingRight = true;
 
     private int currentActionIndex = 0;
 
@@ -59,17 +60,23 @@ public class PlayerActionManager : MonoBehaviour
 
         if (timer.currIterations == 0)
         {
-            Debug.Log("_p1KeyPresses: "+_p1KeyPresses.Count);
-
+            List<MovementAction> movementList = new List<MovementAction>();
             for (int i = 0; i < _p1KeyPresses.Count; i++)
             {
                 string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
-
-                if (key1 != null && key2 != null)
-                {
-                    
+                if (key1 != null && key2 != null) {
+                    movementList.Add(returnCombo(key1, key2));
                 }
-                else Debug.Log("One player forgot to enter an action! Not executing...");
+                else {
+                    movementList.Add(null);
+                };
+            }
+
+            for (int i = 0; i < movementList.Count; i++) {
+                if(movementList[i] != null) {
+                    Debug.Log(movementList[i].actionName);
+                    Move(movementList[i]);
+                }
             }
 
             _p1KeyPresses.Clear();
@@ -78,6 +85,11 @@ public class PlayerActionManager : MonoBehaviour
 
             inputReader.StartQueue(0, timer.getStartingTime());
         }
+    }
+
+    void Move(MovementAction action) {
+        Vector3 newPos = action.TriggerAction(playerObject);
+        Tween(newPos, action.faceRight);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -130,20 +142,56 @@ public class PlayerActionManager : MonoBehaviour
     }
 
     private MovementAction returnCombo(string key1, string key2) {
-        if(key1 == "W" && key2 == "Left" || key1 == "A" && key2 == "Up") {
+        if((key1 == "W" && key2 == "Left") || (key1 == "A" && key2 == "Up")) {
             return _p1MoveActions["Move Top Left"];
         }
-        else if(key1 == "W" && key2 == "Right" || key1 == "D" && key2 == "Up") {
+        else if((key1 == "W" && key2 == "Right") || (key1 == "D" && key2 == "Up")) {
             return _p1MoveActions["Move Top Right"];
         }
-        else if(key1 == "S" && key2 == "Left" || key1 == "A" && key2 == "Bottom") {
+        else if((key1 == "S" && key2 == "Left") || (key1 == "A" && key2 == "Bottom")) {
             return _p1MoveActions["Move Bottom Left"];
         }
-        else if(key1 == "S" && key2 == "Right" || key1 == "D" && key2 == "Bottom") {
+        else if((key1 == "S" && key2 == "Right") || (key1 == "D" && key2 == "Bottom")) {
             return _p1MoveActions["Move Bottom Right"];
-        } else {
+        } 
+        else if((key1 == "W" && key2 == "Up")) {
+            return _p1MoveActions["W"];
+        } 
+        else if((key1 == "S" && key2 == "Down")) {
+            return _p1MoveActions["S"];
+        } 
+        else if((key1 == "D" && key2 == "Right")) {
+            return _p1MoveActions["D"];
+        } 
+        else if((key1 == "A" && key2 == "Left")) {
+            return _p1MoveActions["A"];
+        } 
+        else {
+            Debug.Log("Opposite returned :(");
             return null;
         }
     }
 
+    private void Tween(Vector3 target, bool faceRight)
+    {
+        float time = 0.2f;
+
+        if (!_isFacingRight && faceRight)
+        {
+            _isFacingRight = true;
+            sprite.DORotate(new Vector3(0, -90, 0), time).SetEase(Ease.InQuad);
+            sprite.DOScale(new Vector3(1, 1, 1), 0).SetDelay(time);
+            sprite.DORotate(new Vector3(0, 90, 0), 0).SetDelay(time).SetEase(Ease.OutQuad);
+            sprite.DORotate(new Vector3(0, 0, 0), time).SetDelay(time);
+        }
+        else if (_isFacingRight && !faceRight)
+        {
+            _isFacingRight = false;
+            sprite.DORotate(new Vector3(0, -90, 0), time).SetEase(Ease.InQuad);
+            sprite.DOScale(new Vector3(-1, 1, 1), 0).SetDelay(time);
+            sprite.DORotate(new Vector3(0, 90, 0), 0).SetDelay(time).SetEase(Ease.OutQuad);
+            sprite.DORotate(new Vector3(0, 0, 0), time).SetDelay(time);
+        }
+        playerObject.transform.DOMove(target, 0.15f);
+    }
 }
