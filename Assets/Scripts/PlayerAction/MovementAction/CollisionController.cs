@@ -51,7 +51,7 @@ public class CollisionController : MonoBehaviour
 
     public void UpdateCollider(string side, GameObject item)
     {
-        Debug.Log(side);
+        //Debug.Log(side);
         switch (side)
         {
             case "t":
