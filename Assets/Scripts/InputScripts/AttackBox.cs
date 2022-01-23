@@ -57,7 +57,8 @@ public class AttackBox : MonoBehaviour
                 break;
         }
         image.DOAnchorPosX(0, 1);
-        image.DORotate(new Vector3(0, 0, angle), .25f).SetDelay(.75f);
+        image.DORotate(new Vector3(0, 0, angle), .5f).SetDelay(.5f);
+        image.GetComponent<Image>().DOFade(0, .1f).SetDelay(.9f);
     }
 
     public void Register(Direction direction)
