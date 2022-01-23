@@ -28,18 +28,29 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isTimerRunning) {
-            if (timeRemaining >= 0) {
+        if (!isTimerRunning)
+        {
+            isTimerRunning = true;
+            ResetTime();
+
+            if (currIterations == 0)
+                ResetIterations();
+        }
+        else
+        {
+            if (timeRemaining >= 0)
+            {
                 timeRemaining -= Time.deltaTime;
                 timerImage.fillAmount = timeRemaining / _maxTime;
             }
-            else {
+            else
+            {
                 timeRemaining = 0.00f;
                 isTimerRunning = false;
                 inputReader.ResetPlayerMove();
                 --currIterations;
             }
-        } 
+        }
     }
 
     public void ResetTime()

@@ -336,6 +336,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
+--- !u!4 &196395775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6584769331462466836, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
+  m_PrefabInstance: {fileID: 196395774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &214122097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1902860371097383313, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
@@ -435,7 +440,6 @@ GameObject:
   - component: {fileID: 532385296}
   - component: {fileID: 532385297}
   - component: {fileID: 532385300}
-  - component: {fileID: 532385298}
   m_Layer: 0
   m_Name: Player Input
   m_TagString: Untagged
@@ -559,18 +563,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &532385298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532385295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc0e86609a5b5f4fabcd61a4ff083eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &532385300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,13 +575,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b5a4fceac1c7f489932fd1bef2904d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 1789616917}
+  playerObject: {fileID: 214122097}
+  sprite: {fileID: 196395775}
   actions:
   - {fileID: 11400000, guid: 75e4f732eb8da764cb75415ea07b8550, type: 2}
   - {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
   - {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}
   - {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
   numberOfMaxActions: 0
+  timer: {fileID: 1789616917}
   inputReader: {fileID: 0}
 --- !u!1 &1346180817
 GameObject:

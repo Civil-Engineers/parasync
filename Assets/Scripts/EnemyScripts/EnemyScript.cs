@@ -63,10 +63,7 @@ public class EnemyScript : MonoBehaviour
                     Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
                     Tween(newPos, _enemyActions["Move Left"].faceRight);
                 }
-                timerObject.ResetIterations();
             }
-            timerObject.isTimerRunning = true;
-            timerObject.ResetTime();
         }   
     }
 
