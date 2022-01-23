@@ -18,7 +18,7 @@ public class AttackBox : MonoBehaviour
     void Start()
     {
         imageInitLoc = image.anchoredPosition;
-        image.GetComponent<Image>().color = new Color(1,1,1,0);
+        image.GetComponent<Image>().color = new Color(1, 1, 1, 0);
     }
 
     // Update is called once per frame
@@ -58,6 +58,9 @@ public class AttackBox : MonoBehaviour
         }
         image.DOAnchorPosX(0, 1);
         image.DORotate(new Vector3(0, 0, angle), .5f).SetDelay(.5f);
+
+        image.DOScale(new Vector3(2f, 2f, 2f), .1f).SetDelay(.8f);
+        image.DOScale(new Vector3(.5f, .5f, .5f), .1f).SetDelay(.9f);
         image.GetComponent<Image>().DOFade(0, .1f).SetDelay(.9f);
     }
 
@@ -81,6 +84,7 @@ public class AttackBox : MonoBehaviour
         }
         image.DORotate(new Vector3(0, 0, angle), .2f);
         image.anchoredPosition = imageInitLoc;
+        image.localScale = new Vector3(1, 1, 1);
         image.GetComponent<Image>().DOFade(1, .2f);
     }
 
