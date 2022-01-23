@@ -6,9 +6,13 @@ using DG.Tweening;
 
 public class PlayerActionManager : MonoBehaviour
 {
-    [SerializeField] private Timer timer;
+    [SerializeField] private GameObject playerObject;
+    [SerializeField] private Transform sprite;
+
     [SerializeField] private MovementAction[] actions;
     [SerializeField] private int numberOfMaxActions;
+
+    [SerializeField] private Timer timer;
     [SerializeField] private InputReader inputReader;
 
     private Dictionary<string, MovementAction> _p1MoveActions, _p2MoveActions;
@@ -53,6 +57,21 @@ public class PlayerActionManager : MonoBehaviour
             string p2Keys = string.Join(",", _p2KeyPresses);
             Debug.Log("P1: " + p1Keys);
             Debug.Log("P2: " + p2Keys);
+
+            for (int i = 0; i < _p1KeyPresses.Count; i++)
+            {
+                string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
+
+                if (key1 != null && key2 != null)
+                {
+                    if (_p1MoveActions.ContainsKey(key1))
+                        Debug.Log("Execute " + key1);
+                    if (_p2MoveActions.ContainsKey(key2))
+                        Debug.Log("Execute " + key2);
+                }
+                else Debug.Log("One player forgot to enter an action! Not executing...");
+            }
+
             _p1KeyPresses.Clear();
             _p2KeyPresses.Clear();
         }
