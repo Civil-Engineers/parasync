@@ -17,8 +17,7 @@ public class AttackBox : MonoBehaviour
     void Start()
     {
         imageInitLoc = image.anchoredPosition;
-        // image.GetComponent<Image>().color = new Color(1,1,1,0);
-        Move();
+        image.GetComponent<Image>().color = new Color(1,1,1,0);
     }
 
     // Update is called once per frame
