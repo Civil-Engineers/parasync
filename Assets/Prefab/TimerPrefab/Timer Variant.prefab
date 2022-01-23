@@ -176,7 +176,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7008048463869974326, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
       propertyPath: m_Name
-      value: Timer
+      value: Timer Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673224502262999518, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 6953906074790334848}
+    - target: {fileID: 7673224502262999518, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
+      propertyPath: timerImage
+      value: 
+      objectReference: {fileID: 6953906074790334848}
+    - target: {fileID: 7673224502262999518, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
+      propertyPath: turnTimeInSeconds
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
