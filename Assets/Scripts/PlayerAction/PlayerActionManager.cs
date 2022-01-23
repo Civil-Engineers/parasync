@@ -11,7 +11,6 @@ public class PlayerActionManager : MonoBehaviour
 
     [SerializeField] private MovementAction[] actions;
     [SerializeField] private int numberOfMaxActions;
-
     [SerializeField] private Timer timer;
     [SerializeField] private InputReader inputReader;
 
@@ -61,21 +60,17 @@ public class PlayerActionManager : MonoBehaviour
         if (timer.currIterations == 0)
         {
             Debug.Log("_p1KeyPresses: "+_p1KeyPresses.Count);
-            // string p1Keys = string.Join(",", _p1KeyPresses);
-            // string p2Keys = string.Join(",", _p2KeyPresses);
-            // for (int i = 0; i < _p1KeyPresses.Count; i++)
-            // {
-            //     string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
 
-            //     if (key1 != null && key2 != null)
-            //     {
-            //         // if (_p1MoveActions.ContainsKey(key1))
-            //         //     //Debug.Log("Execute " + key1);
-            //         // if (_p2MoveActions.ContainsKey(key2))
-            //         //     //Debug.Log("Execute " + key2);
-            //     }
-            //     //else Debug.Log("One player forgot to enter an action! Not executing...");
-            // }
+            for (int i = 0; i < _p1KeyPresses.Count; i++)
+            {
+                string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
+
+                if (key1 != null && key2 != null)
+                {
+                    
+                }
+                else Debug.Log("One player forgot to enter an action! Not executing...");
+            }
 
             _p1KeyPresses.Clear();
             _p2KeyPresses.Clear();
@@ -133,4 +128,22 @@ public class PlayerActionManager : MonoBehaviour
 
         }
     }
+
+    private MovementAction returnCombo(string key1, string key2) {
+        if(key1 == "W" && key2 == "Left" || key1 == "A" && key2 == "Up") {
+            return _p1MoveActions["Move Top Left"];
+        }
+        else if(key1 == "W" && key2 == "Right" || key1 == "D" && key2 == "Up") {
+            return _p1MoveActions["Move Top Right"];
+        }
+        else if(key1 == "S" && key2 == "Left" || key1 == "A" && key2 == "Bottom") {
+            return _p1MoveActions["Move Bottom Left"];
+        }
+        else if(key1 == "S" && key2 == "Right" || key1 == "D" && key2 == "Bottom") {
+            return _p1MoveActions["Move Bottom Right"];
+        } else {
+            return null;
+        }
+    }
+
 }
