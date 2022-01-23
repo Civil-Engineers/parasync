@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1902860371097383312, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1407700833}
     - target: {fileID: 1902860371097383313, guid: da0c53f4ce7a92448ac17d7f0f6fc705, type: 3}
       propertyPath: m_Name
       value: Movement Variant (1)
@@ -545,6 +549,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1407700833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7113742812064791140, guid: 8e9a887e8eb781caeab328368623f0b6, type: 3}
+  m_PrefabInstance: {fileID: 5965169804099480934}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68dfc4128e157e47a10b24731b5925a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1524721345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6953906074790334848, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
@@ -743,6 +758,10 @@ PrefabInstance:
       propertyPath: displayInput
       value: 
       objectReference: {fileID: 5965169804099480935}
+    - target: {fileID: 7218025184725300263, guid: 8e9a887e8eb781caeab328368623f0b6, type: 3}
+      propertyPath: m_margin.z
+      value: -601.1763
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e9a887e8eb781caeab328368623f0b6, type: 3}
 --- !u!114 &5965169804099480935 stripped
@@ -871,6 +890,10 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 1524721345}
+    - target: {fileID: 5619655701889739976, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1407700833}
     - target: {fileID: 6287714440665198589, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
       propertyPath: m_IsActive
       value: 1
