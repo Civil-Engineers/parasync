@@ -5,13 +5,42 @@ using TMPro;
 
 public class InputReader : MonoBehaviour
 {
-    public bool playerMove = true;
-    // Start is called before the first frame update
-    public List<string> playerOneSequence = new List<string>();
-    public List<string> playerTwoSequence = new List<string>();
-    public TMP_Text displayInput;
-    string pOneString = "";
-    string pTwoString = "";
+    [SerializeField] private AttackBox[] player1;
+    [SerializeField] private AttackBox[] player2;
+
+    public enum Player {player1, player2};
+
+
+    int actionIndex = 0;
+
+
+
+    [SerializeField] private AttackBox a;
+
+
+    public void StartQueue(int index) {
+        player1[index].StartQueue();
+        player2[index].StartQueue();
+        actionIndex = 0;
+    }
+
+    public void Register(Player player, AttackBox.Direction direction) {
+        if (player == Player.player1) {
+            player1[actionIndex].Register(direction);
+        }
+        if (player == Player.player2) {
+            player2[actionIndex].Register(direction);
+        }
+    }
+
+    public void Move(int index) {
+        player1[index].Move();
+        player2[index].Move();
+    }
+
+
+    
+
     void Start()
     {
         
@@ -20,45 +49,16 @@ public class InputReader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerMove) {
-            //Get the list of inputs from Riki's script
-            //For now I test using my own input
-            if(playerOneSequence.Count == 0 || playerTwoSequence.Count == 0) {
-                pOneString = "";
-                pTwoString = "";
-                displayInput.text = "";
-            }
-            if(playerOneSequence.Count > playerTwoSequence.Count) {
-                for(int i = 0; i < playerTwoSequence.Count; i++) {  
-                    pOneString = pOneString + playerOneSequence[i] + "  ";
-                    pTwoString = pTwoString + playerTwoSequence[i] + "  ";
-                    displayInput.text = pOneString + "\n" + pTwoString;
-                }
-            } else {
-                for(int i = 0; i < playerOneSequence.Count; i++) {  
-                    pOneString = pOneString + playerOneSequence[i] + "  ";
-                    pTwoString = pTwoString + playerTwoSequence[i] + "  ";
-                    displayInput.text = pOneString + "\n" + pTwoString;
-                }
-            } 
-            playerOneSequence.Clear();
-            playerTwoSequence.Clear();
-            playerMove = false;
-        }
+
     }
 
     public void ResetPlayerMove() {
-        playerMove = true;
-        pOneString = "";
-        pTwoString = "";
     }
 
     public void AddPlayerOneInput(string playerOneInput) {
-        playerOneSequence.Add(playerOneInput);
     }
 
     public void AddPlayerTwoInput(string playerTwoInput) {
-        playerTwoSequence.Add(playerTwoInput);
     }
 
 }
