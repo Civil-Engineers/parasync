@@ -11,17 +11,18 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private int numberOfMaxActions;
     [SerializeField] private InputReader inputReader;
 
-    private Dictionary<string, MovementAction> _p1MoveActions;
-    private Dictionary<string, MovementAction> _p2MoveActions;
-
-    private string _p1Key;
-    private string _p2Key;
+    private Dictionary<string, MovementAction> _p1MoveActions, _p2MoveActions;
+    private List<string> _p1KeyPresses, _p2KeyPresses;
+    private string _p1Key = null, _p2Key = null;
 
     // Start is called before the first frame update
     void Start()
     {
         _p1MoveActions = new Dictionary<string, MovementAction>();
         _p2MoveActions = new Dictionary<string, MovementAction>();
+
+        _p1KeyPresses = new List<string>();
+        _p2KeyPresses = new List<string>();
 
         foreach (MovementAction action in actions)
         {
@@ -38,8 +39,22 @@ public class PlayerActionManager : MonoBehaviour
         if (!timer.isTimerRunning)
         {
             Debug.Log(_p1Key + " " + _p2Key);
+            _p1KeyPresses.Add(_p1Key);
+            _p2KeyPresses.Add(_p2Key);
+
             _p1Key = null;
             _p2Key = null;
+        }
+
+        if (timer.currIterations == 0)
+        {
+            Debug.Log("Completed entire sequence");
+            string p1Keys = string.Join(",", _p1KeyPresses);
+            string p2Keys = string.Join(",", _p2KeyPresses);
+            Debug.Log("P1: " + p1Keys);
+            Debug.Log("P2: " + p2Keys);
+            _p1KeyPresses.Clear();
+            _p2KeyPresses.Clear();
         }
     }
 
