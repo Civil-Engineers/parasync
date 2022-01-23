@@ -23,7 +23,11 @@ public class InputReader : MonoBehaviour
         if(playerMove) {
             //Get the list of inputs from Riki's script
             //For now I test using my own input
-            
+            if(playerOneSequence.Count == 0 || playerTwoSequence.Count == 0) {
+                pOneString = "";
+                pTwoString = "";
+                displayInput.text = "";
+            }
             if(playerOneSequence.Count > playerTwoSequence.Count) {
                 for(int i = 0; i < playerTwoSequence.Count; i++) {  
                     pOneString = pOneString + playerOneSequence[i] + "  ";
@@ -37,12 +41,16 @@ public class InputReader : MonoBehaviour
                     displayInput.text = pOneString + "\n" + pTwoString;
                 }
             } 
+            playerOneSequence.Clear();
+            playerTwoSequence.Clear();
             playerMove = false;
         }
     }
 
     public void ResetPlayerMove() {
         playerMove = true;
+        pOneString = "";
+        pTwoString = "";
     }
 
     public void AddPlayerOneInput(string playerOneInput) {
