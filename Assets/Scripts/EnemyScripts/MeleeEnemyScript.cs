@@ -28,7 +28,7 @@ public class MeleeEnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!timerObject.IsTimerRunning) {
+        if(!timerObject.isTimerRunning) {
             float currX = enemyObject.transform.position.x;
             float currZ = enemyObject.transform.position.z;
             Vector3 upDir = new Vector3(currX, 0, currZ + 1); 
@@ -63,7 +63,7 @@ public class MeleeEnemyScript : MonoBehaviour
             } else {
                 Debug.Log("We have a problem dude.");
             }
-            timerObject.IsTimerRunning = true;
+            timerObject.isTimerRunning = true;
             timerObject.ResetTime();
         }   
     }
