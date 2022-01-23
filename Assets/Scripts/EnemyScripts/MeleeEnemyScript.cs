@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class EnemyScript : MonoBehaviour
+public class MeleeEnemyScript : MonoBehaviour
 {
     public Timer timerObject;
     public PlayerMove playerObject;
@@ -62,8 +62,8 @@ public class EnemyScript : MonoBehaviour
             } else {
                 Debug.Log("We have a problem dude.");
             }
-            timerObject.IsTimerRunning = true;
-            timerObject.ResetTime();
+            // timerObject.IsTimerRunning = true;
+            // timerObject.ResetTime();
         }   
     }
 
