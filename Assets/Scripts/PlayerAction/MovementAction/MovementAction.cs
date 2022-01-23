@@ -7,6 +7,7 @@ public class MovementAction : Action
 {
     [Header("Movement Action Fields")]
     [Tooltip("Number of units this action causes an entity to move")]
+    [Range(0, 10)]
     [SerializeField] private int moveMagnitude = 1;
     [Tooltip("Direction to move the entity in")]
     [SerializeField] private Vector2 moveDirection;
