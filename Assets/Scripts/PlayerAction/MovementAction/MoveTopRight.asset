@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move Top Right
   p1Actions:
-  - AS
+  - Move Top Right
   p2Actions:
-  - AS
+  - ASB
   moveMagnitude: 2
   moveDirection: {x: 1, y: 1}
   faceRight: 1

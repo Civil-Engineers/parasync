@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Move Bottom Left
   p1Actions:
-  - ASDSAF
+  - Move Bottom Left
   p2Actions:
   - ASDSAF
   moveMagnitude: 2
