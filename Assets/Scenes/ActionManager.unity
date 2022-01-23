@@ -567,17 +567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68dfc4128e157e47a10b24731b5925a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1524721345 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6953906074790334848, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
-  m_PrefabInstance: {fileID: 8608776251275772703}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1640059752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8997005197360616783, guid: d900334679c59fd6f9531861bd37dce4, type: 3}
@@ -943,13 +932,13 @@ PrefabInstance:
       value: Timer
       objectReference: {fileID: 0}
     - target: {fileID: 5619655701889739976, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
-      propertyPath: timer
-      value: 
-      objectReference: {fileID: 1524721345}
-    - target: {fileID: 5619655701889739976, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1407700833}
+    - target: {fileID: 5619655701889739976, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
+      propertyPath: secondsRemaining
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6287714440665198589, guid: bccbc8202b5dbf2a184e4adc01c1aeca, type: 3}
       propertyPath: m_IsActive
       value: 1
