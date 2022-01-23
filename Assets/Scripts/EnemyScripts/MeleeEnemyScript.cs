@@ -62,8 +62,8 @@ public class MeleeEnemyScript : MonoBehaviour
             } else {
                 Debug.Log("We have a problem dude.");
             }
-            // timerObject.IsTimerRunning = true;
-            // timerObject.ResetTime();
+            timerObject.IsTimerRunning = true;
+            timerObject.ResetTime();
         }   
     }
 
