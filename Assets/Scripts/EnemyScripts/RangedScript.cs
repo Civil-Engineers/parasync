@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class RangedScript : MonoBehaviour {
     public Timer timerObject;
-    public PlayerMove playerObject;
+    public GameObject playerObject;
     [SerializeField] private Transform sprite;
     [SerializeField] private int speed = 1;
     [SerializeField] private GameObject enemyObject;
@@ -20,13 +20,13 @@ public class RangedScript : MonoBehaviour {
         _enemyActions = new Dictionary<string, MovementAction>();
 
         foreach (MovementAction action in actions)
-            _enemyActions.Add(action.actionName, action);
+            _enemyActions.Add(action.ActionName, action);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!timerObject.isTimerRunning) {
+        if(!timerObject.IsRunning) {
             float currX = enemyObject.transform.position.x;
             float currZ = enemyObject.transform.position.z;
             Vector3 upDir = new Vector3(currX, 0, currZ + 1); 
@@ -45,19 +45,19 @@ public class RangedScript : MonoBehaviour {
             Debug.Log(maxMag);
             if(maxMag == magnitudeUp) { 
                 Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Forward"].faceRight);
+                Tween(newPos, _enemyActions["Move Forward"].FaceRight);
             }
             else if(maxMag == magnitudeDown) {  
                 Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Backward"].faceRight);
+                Tween(newPos, _enemyActions["Move Backward"].FaceRight);
             }
             else if(maxMag == magnitudeRight) {  
                 Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Right"].faceRight);
+                Tween(newPos, _enemyActions["Move Right"].FaceRight);
             }
             else if(maxMag == magnitudeLeft) {
                 Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Left"].faceRight);
+                Tween(newPos, _enemyActions["Move Left"].FaceRight);
             } else {
                 Debug.Log("We have a problem dude.");
             }

@@ -190,10 +190,6 @@ PrefabInstance:
       propertyPath: maxIterations
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7673224502262999518, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
-      propertyPath: turnTimeInSeconds
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63457d9948dcf44d78e0900f7a75f0a6, type: 3}
 --- !u!224 &149709378384146025 stripped

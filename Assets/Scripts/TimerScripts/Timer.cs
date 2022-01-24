@@ -6,73 +6,69 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {   
-    [SerializeField] private float turnTimeInSeconds = 5.00f;
+    [SerializeField] private float turnTimeInSeconds = 2f;
     [SerializeField] private Image timerImage;
     [SerializeField] private InputReader inputReader;
 
-    [HideInInspector] public bool isTimerRunning = true;
     [SerializeField] private int maxIterations = 4;
-    [HideInInspector] public int currIterations;
+    private int _currIterations;
 
     private float _maxTime;
-    [HideInInspector] public float timeRemaining;
+    private float _timeRemaining;
+
+    private bool _isRunning = true;
 
     // Start is called before the first frame update
     void Start()
     {
        _maxTime = turnTimeInSeconds;
-       timeRemaining = turnTimeInSeconds;
-       currIterations = maxIterations;
+       _timeRemaining = turnTimeInSeconds;
+       _currIterations = maxIterations;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isTimerRunning)
+        if (!_isRunning)
         {
-            isTimerRunning = true;
+            _isRunning = true;
             ResetTime();
 
-            if (currIterations == 0)
+            if (_currIterations == 0)
                 ResetIterations();
         }
         else
         {
-            if (timeRemaining >= 0)
+            if (_timeRemaining >= 0)
             {
-                timeRemaining -= Time.deltaTime;
-                timerImage.fillAmount = timeRemaining / _maxTime;
+                _timeRemaining -= Time.deltaTime;
+                timerImage.fillAmount = _timeRemaining / _maxTime;
             }
             else {
-                timeRemaining = 0;
-
-                inputReader.ResetPlayerMove();
-                currIterations--;
-                Debug.Log("currIterations: " + currIterations);
+                _timeRemaining = 0;
+                _currIterations--;
                 GameObject[] attackMarkers = GameObject.FindGameObjectsWithTag("Respawn");
                 foreach(GameObject marker in attackMarkers) {
                     GameObject.Destroy(marker);
                 }
-                isTimerRunning = false;
+                _isRunning = false;
             }
         }
     }
 
     public void ResetTime()
     {
-        timeRemaining = turnTimeInSeconds;
+        _timeRemaining = turnTimeInSeconds;
     }
 
     public void ResetIterations()
     {
-        currIterations = maxIterations;
+        _currIterations = maxIterations;
     }
 
-    public int GetMaxIterations() {
-        return maxIterations;
-    }
-
-    public float getStartingTime() {
-        return turnTimeInSeconds;
-    }
+    public bool IsRunning { get { return _isRunning; } }
+    public int MaxIterations { get { return maxIterations; } }
+    public int CurrIterations { get { return _currIterations; } }
+    public float StartingTime { get { return turnTimeInSeconds; } }
+    public float TimeRemaining { get { return _timeRemaining; } }
 }

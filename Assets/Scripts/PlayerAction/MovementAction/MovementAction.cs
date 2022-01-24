@@ -11,8 +11,8 @@ public class MovementAction : Action
     [SerializeField] private int moveMagnitude = 1;
     [Tooltip("Direction to move the entity in")]
     [SerializeField] private Vector2 moveDirection;
-    public bool faceRight;
-    public float moveDelayInMs = 250f;
+    [SerializeField] private bool faceRight;
+    [SerializeField] private float moveDelayInMs = 250f;
 
     public Vector3 TriggerAction(GameObject obj)
     {
@@ -23,4 +23,9 @@ public class MovementAction : Action
         currPos += new Vector3(newX, 0, newZ);
         return currPos;
     }
+
+    public int MoveMagnitude { get { return moveMagnitude; } }
+    public Vector2 MoveDirection { get { return moveDirection; } }
+    public bool FaceRight { get {  return faceRight; } }
+    public float MoveDelayInMs { get { return moveDelayInMs; } }
 }

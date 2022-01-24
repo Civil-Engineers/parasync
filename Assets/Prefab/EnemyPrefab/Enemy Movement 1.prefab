@@ -105,13 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6adfa92654513608906b717cf38ca03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyObject: {fileID: 8997005197360616783}
-  sprite: {fileID: 4454716655512865226}
-  playerObject: {fileID: 0}
   timerObject: {fileID: 0}
+  playerObject: {fileID: 0}
+  attackIndicator: {fileID: 5598503285356101137, guid: c446723ec1e4236909e4ce72a2f61ddc, type: 3}
+  sprite: {fileID: 4454716655512865226}
   speed: 1
+  enemyObject: {fileID: 8997005197360616783}
   actions:
-  - {fileID: 11400000, guid: 75e4f732eb8da764cb75415ea07b8550, type: 2}
+  - {fileID: 11400000, guid: 1b31f218d16ecc6b1bcda6511191308d, type: 2}
   - {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
   - {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
   - {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}

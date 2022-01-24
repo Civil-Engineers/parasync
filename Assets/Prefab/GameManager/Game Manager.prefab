@@ -180,7 +180,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   sprite: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: 75e4f732eb8da764cb75415ea07b8550, type: 2}
+  - {fileID: 11400000, guid: 1b31f218d16ecc6b1bcda6511191308d, type: 2}
   - {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
   - {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
   - {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}

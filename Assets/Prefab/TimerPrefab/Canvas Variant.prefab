@@ -125,7 +125,4 @@ MonoBehaviour:
   turnTimeInSeconds: 2
   timerImage: {fileID: 0}
   inputReader: {fileID: 0}
-  isTimerRunning: 1
   maxIterations: 2
-  currIterations: 0
-  timeRemaining: 0

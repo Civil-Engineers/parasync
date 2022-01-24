@@ -21,41 +21,35 @@ public class AttackBox : MonoBehaviour
         image.GetComponent<Image>().color = new Color(1, 1, 1, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    public void Move(Direction direction)
+    public void Move(Vector2 movement)
     {
         float angle = 0;
-        switch (direction)
-        {
-            case Direction.Up:
-                angle = 0;
-                break;
-            case Direction.UpRight:
-                angle = -45;
-                break;
-            case Direction.Right:
-                angle = -90;
-                break;
-            case Direction.DownRight:
-                angle = -135;
-                break;
-            case Direction.Down:
-                angle = -180;
-                break;
-            case Direction.DownLeft:
-                angle = -225;
-                break;
-            case Direction.Left:
-                angle = -270;
-                break;
-            case Direction.UpLeft:
-                angle = -315;
-                break;
-        }
+
+        // Up
+        if (movement.x == 0 && movement.y >= 1)
+            angle = 0;
+        // Up Right
+        else if (movement.x >= 1 && movement.y >= 1)
+            angle = -45;
+        // Right
+        else if (movement.x >= 1 && movement.y == 0)
+            angle = -90;
+        // Down Right
+        else if (movement.x == 1 && movement.y == -1)
+            angle = -135;
+        // Down
+        else if (movement.x == 0 && movement.y <= -1)
+            angle = -180;
+        // Down Left
+        else if (movement.x <= -1 && movement.y <= -1)
+            angle = -225;
+        // Left
+        else if (movement.x <= -1 && movement.y == 0)
+            angle = -270;
+        // Up left
+        else if (movement.x <= -1 && movement.y >= 1)
+            angle = -315;
+
         image.DOAnchorPosX(0, 1);
         image.DORotate(new Vector3(0, 0, angle), .5f).SetDelay(.5f);
 
@@ -64,24 +58,19 @@ public class AttackBox : MonoBehaviour
         image.GetComponent<Image>().DOFade(0, .1f).SetDelay(.9f);
     }
 
-    public void Register(Direction direction)
+    public void Register(Vector2 direction)
     {
         float angle = 0;
-        switch (direction)
-        {
-            case Direction.Up:
-                angle = 0;
-                break;
-            case Direction.Down:
-                angle = 180;
-                break;
-            case Direction.Left:
-                angle = 90;
-                break;
-            case Direction.Right:
-                angle = -90;
-                break;
-        }
+
+        if (direction.x == 0 && direction.y == 1)
+            angle = 0;
+        else if (direction.x == 0 && direction.y == -1)
+            angle = 180;
+        else if (direction.x == -1 && direction.y == 0)
+            angle = 90;
+        else if (direction.x == 1 && direction.y == 0)
+            angle = -90;
+
         image.DORotate(new Vector3(0, 0, angle), .2f);
         image.anchoredPosition = imageInitLoc;
         image.localScale = new Vector3(1, 1, 1);

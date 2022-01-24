@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class PlayerActionManager : MonoBehaviour
 
     [SerializeField] private MovementAction[] actions;
     [SerializeField] private int numberOfMaxActions;
+
     [SerializeField] private Timer timer;
     [SerializeField] private InputReader inputReader;
 
@@ -19,9 +21,9 @@ public class PlayerActionManager : MonoBehaviour
     private string _p1Key = null, _p2Key = null;
     private bool _isFacingRight = true;
 
-    private int currentActionIndex = 0;
+    private List<Vector2> _movementList;
+    private List<bool> _faceList;
 
-    private bool isTimerRunnningBefore = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,217 +35,120 @@ public class PlayerActionManager : MonoBehaviour
 
         foreach (MovementAction action in actions)
         {
-            string p1Actions = string.Join("", action.p1Actions);
-            string p2Actions = string.Join("", action.p2Actions);
+            string p1Actions = string.Join("", action.P1Actions);
+            string p2Actions = string.Join("", action.P2Actions);
             _p1MoveActions.Add(p1Actions, action);
             _p2MoveActions.Add(p2Actions, action);
         }
 
-        inputReader.SetAmount(timer.GetMaxIterations());
-        inputReader.StartQueue(0, timer.getStartingTime());
-
+        inputReader.SetAmount(timer.MaxIterations);
+        inputReader.StartQueue(0, timer.StartingTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!timer.isTimerRunning)
+        // When a single iteration is complete
+        if (!timer.IsRunning)
         {
+            Debug.Log(_p1Key + " " + _p2Key);
             _p1KeyPresses.Add(_p1Key);
             _p2KeyPresses.Add(_p2Key);
 
-            if (_p2KeyPresses.Count < timer.GetMaxIterations())
-            {
-                inputReader.StartQueue(_p2KeyPresses.Count, timer.getStartingTime());
-            }
-
+            if (_p1KeyPresses.Count < timer.MaxIterations)
+                inputReader.StartQueue(_p1KeyPresses.Count, timer.StartingTime);
 
             _p1Key = null;
             _p2Key = null;
         }
 
-        if (timer.currIterations == 0)
+        // When an entire sequence is completed, marked by number of iterations
+        // Triggered controls are processed and combined into a single vector
+        if (timer.CurrIterations == 0)
         {
-            List<MovementAction> movementList = new List<MovementAction>();
+            _movementList = new List<Vector2>();
+            _faceList = new List<bool>();
+
             for (int i = 0; i < _p1KeyPresses.Count; i++)
             {
                 string key1 = _p1KeyPresses[i], key2 = _p2KeyPresses[i];
+
                 if (key1 != null && key2 != null)
                 {
-                    movementList.Add(returnCombo(key1, key2));
+                    MovementAction action1 = _p1MoveActions[key1];
+                    MovementAction action2 = _p2MoveActions[key2];
+
+                    Vector2 combinedVector = CombineMovement(action1, action2);
+                    bool faceRight = CombineFacing(action1, action2);
+
+                    _movementList.Add(combinedVector);
+                    _faceList.Add(faceRight);
                 }
                 else
                 {
-                    movementList.Add(null);
-                };
+                    _movementList.Add(Vector2.zero);
+                    _faceList.Add(false);
+                }
             }
 
-
-            for (int i = 0; i < movementList.Count; i++)
-            {
-                MovementAction action = movementList[i];
-                StartCoroutine(MoveCoroutine(i, action, i));
-            }
+            for (int i = 0; i < _movementList.Count; i++)
+                StartCoroutine(MoveCoroutine(_movementList[i], _faceList[i], i));
 
             _p1KeyPresses.Clear();
             _p2KeyPresses.Clear();
 
-
-            inputReader.StartQueue(0, timer.getStartingTime());
+            inputReader.StartQueue(0, timer.StartingTime);
         }
-    }
-
-    IEnumerator MoveCoroutine(float delay, MovementAction action, int index)
-    {
-
-        yield return new WaitForSeconds(delay);
-
-        if (action != null)
-        {
-            Move(action);
-            inputReader.Move(index, GetDirection(action));
-        }
-        else
-        {
-            inputReader.Fade(index);
-        }
-
-    }
-
-    AttackBox.Direction GetDirection(MovementAction action)
-    {
-        AttackBox.Direction dir = AttackBox.Direction.Up;
-        switch (action.actionName)
-        {
-            case "Move Top Left":
-                dir = AttackBox.Direction.UpLeft;
-                break;
-            case "Move Top Right":
-                dir = AttackBox.Direction.UpRight;
-                break;
-            case "Move Bottom Left":
-                dir = AttackBox.Direction.DownLeft;
-                break;
-            case "Move Bottom Right":
-                dir = AttackBox.Direction.DownRight;
-                break;
-            case "Move Forward":
-                dir = AttackBox.Direction.Up;
-                break;
-            case "Move Left":
-                dir = AttackBox.Direction.Left;
-                break;
-            case "Move Backward":
-                dir = AttackBox.Direction.Down;
-                break;
-            case "Move Right":
-                dir = AttackBox.Direction.Right;
-                break;
-        }
-        return dir;
-    }
-
-
-    void Move(MovementAction action)
-    {
-        Vector3 newPos = action.TriggerAction(playerObject);
-        Tween(newPos, action.faceRight);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        string ctrlName = context.control.displayName;
-
+        // Keep updating triggered controls as long as the timer is running
         if (context.action.triggered)
         {
+            string ctrlName = context.control.displayName;
+
             if (_p1MoveActions.ContainsKey(ctrlName))
             {
                 _p1Key = ctrlName;
-                AttackBox.Direction dir = AttackBox.Direction.Up;
-                switch (_p1Key)
-                {
-                    case "W":
-                        dir = AttackBox.Direction.Up;
-                        break;
-                    case "A":
-                        dir = AttackBox.Direction.Left;
-                        break;
-                    case "S":
-                        dir = AttackBox.Direction.Down;
-                        break;
-                    case "D":
-                        dir = AttackBox.Direction.Right;
-                        break;
-                }
-                inputReader.Register(InputReader.Player.player1, dir);
+                inputReader.Register(InputReader.Player.player1, _p1MoveActions[ctrlName]);
             }
-
             if (_p2MoveActions.ContainsKey(ctrlName))
             {
                 _p2Key = ctrlName;
-                AttackBox.Direction dir = AttackBox.Direction.Up;
-                switch (_p2Key)
-                {
-                    case "Up":
-                        dir = AttackBox.Direction.Up;
-                        break;
-                    case "Left":
-                        dir = AttackBox.Direction.Left;
-                        break;
-                    case "Down":
-                        dir = AttackBox.Direction.Down;
-                        break;
-                    case "Right":
-                        dir = AttackBox.Direction.Right;
-                        break;
-                }
-                inputReader.Register(InputReader.Player.player2, dir);
+                inputReader.Register(InputReader.Player.player2, _p2MoveActions[ctrlName]);
             }
-
         }
     }
 
-    private MovementAction returnCombo(string key1, string key2)
+    IEnumerator MoveCoroutine(Vector2 movement, bool faceRight, int index)
     {
-        Debug.Log(key1+ " " + key2);
-        if ((key1 == "W" && key2 == "Left") || (key1 == "A" && key2 == "Up"))
+        yield return new WaitForSeconds(index);
+
+        if (movement != Vector2.zero)
         {
-            return _p1MoveActions["Move Top Left"];
+            Vector3 currPos = playerObject.transform.position;
+            currPos += new Vector3(movement.x, 0, movement.y);
+            Tween(currPos, faceRight);
+            inputReader.Move(index, movement);
         }
-        else if ((key1 == "W" && key2 == "Right") || (key1 == "D" && key2 == "Up"))
-        {
-            return _p1MoveActions["Move Top Right"];
-        }
-        else if ((key1 == "S" && key2 == "Left") || (key1 == "A" && key2 == "Down"))
-        {
-            return _p1MoveActions["Move Bottom Left"];
-        }
-        else if ((key1 == "S" && key2 == "Right") || (key1 == "D" && key2 == "Down"))
-        {
-            return _p1MoveActions["Move Bottom Right"];
-        }
-        else if ((key1 == "W" && key2 == "Up"))
-        {
-            return _p1MoveActions["W"];
-        }
-        else if ((key1 == "S" && key2 == "Down"))
-        {
-            return _p1MoveActions["S"];
-        }
-        else if ((key1 == "D" && key2 == "Right"))
-        {
-            return _p1MoveActions["D"];
-        }
-        else if ((key1 == "A" && key2 == "Left"))
-        {
-            return _p1MoveActions["A"];
-        }
-        else
-        {
-            Debug.Log("Opposite returned :(");
-            return null;
-        }
+        else inputReader.Fade(index);
+    }
+
+    private Vector3 CombineMovement(MovementAction p1Action, MovementAction p2Action)
+    {
+        float p1VectorX = p1Action.MoveMagnitude * p1Action.MoveDirection.x;
+        float p1VectorY = p1Action.MoveMagnitude * p1Action.MoveDirection.y;
+
+        float p2VectorX = p2Action.MoveMagnitude * p2Action.MoveDirection.x;
+        float p2VectorY = p2Action.MoveMagnitude * p2Action.MoveDirection.y;
+
+        return new Vector2(p1VectorX + p2VectorX, p1VectorY + p2VectorY);
+    }
+
+    private bool CombineFacing(MovementAction p1Action, MovementAction p2Action)
+    {
+        return p1Action.FaceRight || p2Action.FaceRight;
     }
 
     private void Tween(Vector3 target, bool faceRight)

@@ -23,14 +23,14 @@ public class EnemyScript : MonoBehaviour
         _enemyActions = new Dictionary<string, MovementAction>();
 
         foreach (MovementAction action in actions)
-            _enemyActions.Add(action.actionName, action);
+            _enemyActions.Add(action.ActionName, action);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!timerObject.isTimerRunning) {
-            if (timerObject.currIterations == 0)
+        if (!timerObject.IsRunning) {
+            if (timerObject.CurrIterations == 0)
             {
                 float currX = enemyObject.transform.position.x;
                 float currZ = enemyObject.transform.position.z;
@@ -49,19 +49,19 @@ public class EnemyScript : MonoBehaviour
             
                 if (minMag == magnitudeUp) { 
                     Vector3 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
-                    Tween(newPos, _enemyActions["Move Forward"].faceRight);
+                    Tween(newPos, _enemyActions["Move Forward"].FaceRight);
                 }
                 else if (minMag == magnitudeDown) {  
                     Vector3 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
-                    Tween(newPos, _enemyActions["Move Backward"].faceRight);
+                    Tween(newPos, _enemyActions["Move Backward"].FaceRight);
                 }
                 else if (minMag == magnitudeRight) {  
                     Vector3 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
-                    Tween(newPos, _enemyActions["Move Right"].faceRight);
+                    Tween(newPos, _enemyActions["Move Right"].FaceRight);
                 }
                 else if (minMag == magnitudeLeft) {
                     Vector3 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
-                    Tween(newPos, _enemyActions["Move Left"].faceRight);
+                    Tween(newPos, _enemyActions["Move Left"].FaceRight);
                 }
             }
         }   

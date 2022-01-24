@@ -10,12 +10,7 @@ public class InputReader : MonoBehaviour
 
     public enum Player { player1, player2 };
 
-
     int actionIndex = 0;
-
-
-
-    [SerializeField] private AttackBox a;
 
     public void SetAmount(int amount)
     {
@@ -34,7 +29,6 @@ public class InputReader : MonoBehaviour
         }
     }
 
-
     public void StartQueue(int index, float startingTime)
     {
         player1[index].StartQueue(startingTime);
@@ -42,22 +36,18 @@ public class InputReader : MonoBehaviour
         actionIndex = index;
     }
 
-    public void Register(Player player, AttackBox.Direction direction)
+    public void Register(Player player, MovementAction action)
     {
         if (player == Player.player1)
-        {
-            player1[actionIndex].Register(direction);
-        }
+            player1[actionIndex].Register(action.MoveDirection);
         if (player == Player.player2)
-        {
-            player2[actionIndex].Register(direction);
-        }
+            player2[actionIndex].Register(action.MoveDirection);
     }
 
-    public void Move(int index, AttackBox.Direction direction)
+    public void Move(int index, Vector2 movement)
     {
-        player1[index].Move(direction);
-        player2[index].Move(direction);
+        player1[index].Move(movement);
+        player2[index].Move(movement);
     }
 
     public void Fade(int index)
@@ -65,31 +55,4 @@ public class InputReader : MonoBehaviour
         player1[index].Fade();
         player2[index].Fade();
     }
-
-
-
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void ResetPlayerMove()
-    {
-    }
-
-    public void AddPlayerOneInput(string playerOneInput)
-    {
-    }
-
-    public void AddPlayerTwoInput(string playerTwoInput)
-    {
-    }
-
 }

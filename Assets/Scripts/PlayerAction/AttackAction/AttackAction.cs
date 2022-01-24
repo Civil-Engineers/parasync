@@ -12,6 +12,6 @@ public class AttackAction : Action
 
     public void TriggerAction()
     {
-        Debug.Log("Triggered " + actionName + " attack action");
+        Debug.Log("Triggered " + ActionName + " attack action");
     }
 }

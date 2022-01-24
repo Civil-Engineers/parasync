@@ -17,19 +17,19 @@ public class MeleeEnemyScript : MonoBehaviour
     private Dictionary<string, MovementAction> _enemyActions;
 
     private bool _isFacingRight = true;
+
     void Start()
     {
         _enemyActions = new Dictionary<string, MovementAction>();
 
         foreach (MovementAction action in actions)
-            _enemyActions.Add(action.actionName, action);
+            _enemyActions.Add(action.ActionName, action);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(timerObject.currIterations == 0) {
+        if(timerObject.CurrIterations == 0) {
             float currX = enemyObject.transform.position.x;
             float currZ = enemyObject.transform.position.z;
             Vector3 upDir = new Vector3(currX, 0, currZ + speed); 
@@ -48,19 +48,19 @@ public class MeleeEnemyScript : MonoBehaviour
             Vector3 newPos = new Vector3();
             if(minMag == magnitudeUp) { 
                 newPos = _enemyActions["Move Forward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Forward"].faceRight);
+                Tween(newPos, _enemyActions["Move Forward"].FaceRight);
             }
             else if(minMag == magnitudeDown) {  
                 newPos = _enemyActions["Move Backward"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Backward"].faceRight);
+                Tween(newPos, _enemyActions["Move Backward"].FaceRight);
             }
             else if(minMag == magnitudeRight) {  
                 newPos = _enemyActions["Move Right"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Right"].faceRight);
+                Tween(newPos, _enemyActions["Move Right"].FaceRight);
             }
             else if(minMag == magnitudeLeft) {
                 newPos = _enemyActions["Move Left"].TriggerAction(enemyObject);
-                Tween(newPos, _enemyActions["Move Left"].faceRight);
+                Tween(newPos, _enemyActions["Move Left"].FaceRight);
             } else {
                 Debug.Log("We have a problem dude.");
             }
