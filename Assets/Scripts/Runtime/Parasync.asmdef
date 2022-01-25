@@ -1,0 +1,18 @@
+{
+    "name": "Parasync",
+    "rootNamespace": "Parasync",
+    "references": [
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "DOTween.Modules"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
