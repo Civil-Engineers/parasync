@@ -12,6 +12,8 @@ public class CollisionController : MonoBehaviour
     private GameObject BottomLeft = null;
     private GameObject Left = null;
     private GameObject TopLeft = null;
+    // private GameObject[] directions = new GameObject[8];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,37 @@ public class CollisionController : MonoBehaviour
     }
     public GameObject GetTopLeft() {
         return TopLeft;
+    }
+
+    public GameObject getCollision(AttackBox.Direction direction) {
+        // public enum Direction { Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft };
+        switch (direction) {
+            case AttackBox.Direction.Up:
+                return Top;
+                break;
+            case AttackBox.Direction.UpRight:
+                return TopRight;
+                break;
+            case AttackBox.Direction.Right:
+                return Right;
+                break;
+            case AttackBox.Direction.DownRight:
+                return BottomRight;
+                break;
+            case AttackBox.Direction.Down:
+                return Bottom;
+                break;
+            case AttackBox.Direction.DownLeft:
+                return BottomLeft;
+                break;
+            case AttackBox.Direction.Left:
+                return Left;
+                break;
+            case AttackBox.Direction.UpLeft:
+                return TopLeft;
+                break; 
+        }
+         return null;
     }
 
     public void UpdateCollider(string side, GameObject item)

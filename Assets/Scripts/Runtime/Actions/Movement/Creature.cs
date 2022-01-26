@@ -25,7 +25,7 @@ public class Creature : MonoBehaviour
         }
     }
 
-    private void Die() {
+    protected virtual void Die() {
         GameObject.Destroy(gameObject);
     }
 }
