@@ -9,7 +9,6 @@ namespace Parasync.Runtime.UI
     public class AttackBox : MonoBehaviour
     {
         public enum Direction { Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft };
-        // Start is called before the first frame update
         [SerializeField] private RectTransform image;
 
         [SerializeField] private RectTransform center;
