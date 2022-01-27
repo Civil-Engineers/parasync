@@ -39,7 +39,7 @@ namespace Parasync.Runtime.UI
         public void TweenCombineArrows(Vector2 direction)
         {
             arrow.DOAnchorPosX(0, 1);
-            arrow.DORotate(new Vector3(0, 0, GetCombinedArrowAngle(direction)), 0.5f).SetDelay(0.5f);
+            arrow.DORotate(new Vector3(0, 0, GetArrowAngle(direction)), 0.5f).SetDelay(0.5f);
 
             arrow.DOMove(center.position, 0.5f).SetDelay(0.5f);
             arrow.DOScale(new Vector3(2, 2, 2), 0.1f).SetDelay(0.8f);
@@ -55,22 +55,6 @@ namespace Parasync.Runtime.UI
         }
 
         private float GetArrowAngle(Vector2 direction)
-        {
-            float angle = 0;
-
-            if (direction.x == 0 && direction.y == 1)
-                angle = 0;
-            else if (direction.x == 0 && direction.y == -1)
-                angle = 180;
-            else if (direction.x == -1 && direction.y == 0)
-                angle = 90;
-            else if (direction.x == 1 && direction.y == 0)
-                angle = -90;
-
-            return angle;
-        }
-
-        private float GetCombinedArrowAngle(Vector2 direction)
         {
             float angle = 0;
 

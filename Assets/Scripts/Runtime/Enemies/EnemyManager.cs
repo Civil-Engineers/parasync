@@ -83,6 +83,7 @@ namespace Parasync.Runtime.Enemies
                 float dirX = dir.x, dirY = dir.y;
                 Vector3 movePos = new Vector3(currX + dirX, 0, currZ + dirY);
                 GameObject indicator = Instantiate(attackIndicator, movePos, Quaternion.identity);
+                indicator.transform.parent = enemyObject.transform;
 
                 indicators[i] = indicator;
             }
