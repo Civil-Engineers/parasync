@@ -46,6 +46,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 8741062939551353349}
+  arrow: {fileID: 1058638549466146474}
+  onArrowsCombined:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1516107564636161360, guid: 994ea9a5f0f042a48b76fa9ff31e08cd, type: 3}
+        m_TargetAssemblyTypeName: PlayerActionManager, Parasync
+        m_MethodName: OnActionsCombined
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &8994151782297183481
 PrefabInstance:
   m_ObjectHideFlags: 0

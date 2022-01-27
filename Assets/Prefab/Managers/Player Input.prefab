@@ -147,11 +147,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
-  sprite: {fileID: 0}
+  playerSprite: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 1b31f218d16ecc6b1bcda6511191308d, type: 2}
   - {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
   - {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
   - {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}
-  numberOfMaxActions: 4
-  inputReader: {fileID: 0}
+  onMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Parasync.Runtime.UI.ActionHotbarManager, Parasync
+        m_MethodName: OnPlayerMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onActionsCombine:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Parasync.Runtime.UI.ActionHotbarManager, Parasync
+        m_MethodName: OnActionsCombine
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onActionsFailedToCombine:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Parasync.Runtime.UI.ActionHotbarManager, Parasync
+        m_MethodName: OnActionsFailedToCombine
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
