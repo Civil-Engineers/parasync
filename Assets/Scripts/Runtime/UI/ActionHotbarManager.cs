@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Parasync.Runtime.Components.Timers;
-using Parasync.Runtime.Actions.Movement;
 
 namespace Parasync.Runtime.UI
 {
@@ -67,18 +66,6 @@ namespace Parasync.Runtime.UI
             onTurnEnd?.Invoke();
         }
 
-        public void Restart()
-        {
-            for (int i = 0; i < _totalIterationsPerTurn; i++)
-            {
-                player1Slots[i].ResetProgress();
-                player2Slots[i].ResetProgress();
-            }
-
-            _currActionSlot = 0;
-            _timer?.ResetTimer();
-        }
-
         public void OnPlayerMove(int playerNum, Vector2 direction)
         {
             switch (playerNum)
@@ -97,6 +84,9 @@ namespace Parasync.Runtime.UI
             player1Slots[index].TweenCombineArrows(direction);
             player2Slots[index].TweenCombineArrows(direction);
 
+            player1Slots[index].TweenResetProgress();
+            player2Slots[index].TweenResetProgress();
+
             onActionsCombined?.Invoke();
         }
 
@@ -105,7 +95,18 @@ namespace Parasync.Runtime.UI
             player1Slots[index].TweenFadeArrow();
             player2Slots[index].TweenFadeArrow();
 
+            player1Slots[index].TweenResetProgress();
+            player2Slots[index].TweenResetProgress();
+
             onActionsFailedToBeCombined?.Invoke();
+        }
+
+        public void OnEnemyTurnEnd() => Restart();
+
+        public void Restart()
+        {
+            _currActionSlot = 0;
+            _timer?.ResetTimer();
         }
     }
 }

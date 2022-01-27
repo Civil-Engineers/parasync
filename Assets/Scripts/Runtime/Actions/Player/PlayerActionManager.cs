@@ -17,6 +17,7 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private UnityEvent<int, Vector2> onMove;
     [SerializeField] private UnityEvent<int, Vector2> onActionsCombine;
     [SerializeField] private UnityEvent<int> onActionsFailedToCombine;
+    [SerializeField] private UnityEvent onPlayerTurnEnd;
 
     private Dictionary<string, MovementAction> _p1MoveActions, _p2MoveActions;
     private List<string> _p1KeyPresses, _p2KeyPresses;
@@ -109,6 +110,10 @@ public class PlayerActionManager : MonoBehaviour
         _p2KeyPresses.Clear();
     }
 
+    public void OnActionsCombined() => _actionsCombined = true;
+
+    public void OnActionsFailedToBeCombined() => _actionsFailedToBeCombined = true;
+
     IEnumerator MoveCoroutine(int index, List<Vector2> movements, List<bool> faces)
     {
         while(index < movements.Count)
@@ -140,11 +145,8 @@ public class PlayerActionManager : MonoBehaviour
 
             index++;
         }
+        onPlayerTurnEnd?.Invoke();
     }
-
-    public void OnActionsCombined() => _actionsCombined = true;
-
-    public void OnActionsFailedToBeCombined() => _actionsFailedToBeCombined = true;
 
     private void MovePlayer(Vector3 moveVector, bool faceRight)
     {

@@ -23,9 +23,9 @@ namespace Parasync.Runtime.UI
             progressBar.fillAmount = progressFilled;
         }
 
-        public void ResetProgress()
+        public void TweenResetProgress()
         {
-            progressBar.fillAmount = 0;
+            progressBar.DOFillAmount(0, 0.7f);
         }
 
         public void TweenRotateArrow(Vector2 direction)

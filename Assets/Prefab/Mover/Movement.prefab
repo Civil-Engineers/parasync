@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6441335715676990183}
   - component: {fileID: 6441335715676990182}
+  - component: {fileID: 6008377024744855607}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -82,3 +83,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6008377024744855607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441335715676990176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6adfa92654513608906b717cf38ca03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 0}
+  attackIndicator: {fileID: 5598503285356101137, guid: c446723ec1e4236909e4ce72a2f61ddc, type: 3}
+  sprite: {fileID: 0}
+  enemyObject: {fileID: 6441335715676990176}
+  actions:
+  - {fileID: 11400000, guid: 1b31f218d16ecc6b1bcda6511191308d, type: 2}
+  - {fileID: 11400000, guid: 5fac943c3bfe3bf44ba837e7baffc4a3, type: 2}
+  - {fileID: 11400000, guid: 905ebe49299b72c4bb8bd409db874d28, type: 2}
+  - {fileID: 11400000, guid: 53df31ed10884a44392e7e8091b9619a, type: 2}
