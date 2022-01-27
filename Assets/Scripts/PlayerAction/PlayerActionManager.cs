@@ -8,6 +8,7 @@ public class PlayerActionManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
     [SerializeField] private Transform sprite;
+    [SerializeField] private CollisionController collisionController;
 
     [SerializeField] private MovementAction[] actions;
     [SerializeField] private int numberOfMaxActions;
@@ -111,7 +112,13 @@ public class PlayerActionManager : MonoBehaviour
 
         if (action != null)
         {
-            Move(action);
+            GameObject collision = collisionController.getCollision(GetDirection(action));
+            if(collision) {
+                Debug.Log("HI wall");
+                Bump(action, collision);
+            } else {
+                Move(action);
+            }
             inputReader.Move(index, GetDirection(action));
         }
         else
@@ -159,6 +166,24 @@ public class PlayerActionManager : MonoBehaviour
     {
         Vector3 newPos = action.TriggerAction(playerObject);
         Tween(newPos, action.faceRight);
+    }
+
+    void Bump(MovementAction action, GameObject collisionObj)
+    {
+        // do code for walls here too
+        GameObject colliderGameObject = collisionObj.transform.parent.gameObject;
+
+        if(colliderGameObject.GetComponent<EnemyScript>()) { // is enemy
+            colliderGameObject.GetComponent<EnemyScript>().Damage(1);
+        }
+        else { // is wall
+
+        }
+
+        // need to animate
+
+        // Vector3 newPos = action.TriggerAction(playerObject);
+        // Tween(newPos, action.faceRight);
     }
 
     public void OnMove(InputAction.CallbackContext context)
