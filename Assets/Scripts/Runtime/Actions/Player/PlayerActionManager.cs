@@ -10,6 +10,7 @@ public class PlayerActionManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
     [SerializeField] private Transform playerSprite;
+    [SerializeField] private CollisionController collisionController;
 
     [SerializeField] private MovementAction[] actions;
 
