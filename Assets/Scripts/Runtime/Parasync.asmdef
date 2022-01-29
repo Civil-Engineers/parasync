@@ -2,9 +2,11 @@
     "name": "Parasync",
     "rootNamespace": "Parasync",
     "references": [
-        "Unity.InputSystem",
         "UnityEngine.UI",
-        "DOTween.Modules"
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "DOTween.Modules",
+        "Ink-Libraries"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
