@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Parasync.Runtime.Components.Timers;
+using Parasync.Editor.Components.Timers;
 using Parasync.Runtime.Actions.Movement;
 
 namespace Parasync.Runtime.Enemies

@@ -1,7 +1,9 @@
+using FluentAssertions;
 using NUnit.Framework;
-using Parasync.Runtime.Components.Timers;
+using Parasync.Editor;
+using Parasync.Editor.Components.Timers;
 
-namespace Parasync.Tests.Runtime.Components
+namespace Parasync.Tests.Editor.Components.Timers
 {
     public class TimerTests
     {
@@ -9,45 +11,45 @@ namespace Parasync.Tests.Runtime.Components
         [TestCase(1f)]
         [TestCase(3f)]
         [TestCase(14.6f)]
-        public void StartingDurationIsSet(float duration)
+        public void TimerStartingDurationIsSet(float duration)
         {
-            var timer = new Timer(duration);
+            Timer timer = A.Timer.WithDuration(duration);
 
-            Assert.IsTrue(timer.RemainingSeconds == duration);
+            timer.RemainingSeconds.Should().Be(duration);
         }
 
         [Test]
-        public void TickingBelowZeroSeconds_StopsAtZero()
+        public void TimerTickingBelowZeroSeconds_StopsAtZero()
         {
-            var timer = new Timer(1f);
+            Timer timer = A.Timer.WithDuration(1f);
 
             timer.Tick(2f);
 
-            Assert.IsTrue(timer.RemainingSeconds == 0f);
+            timer.RemainingSeconds.Should().Be(0f);
         }
 
         [Test]
         public void TimerEnds_EventIsRaised()
         {
-            var timer = new Timer(1f);
+            Timer timer = A.Timer.WithDuration(1f);
             bool eventHasBeenRaised = false;
 
             timer.OnTimerEnd += () => eventHasBeenRaised = true;
             timer.Tick(1f);
 
-            Assert.IsTrue(eventHasBeenRaised);
+            eventHasBeenRaised.Should().BeTrue();
         }
 
         [Test]
         public void TimerDoesNotEnd_EventIsNotRaised()
         {
-            var timer = new Timer(1f);
+            Timer timer = A.Timer.WithDuration(1f);
             bool eventHasBeenRaised = false;
 
             timer.OnTimerEnd += () => eventHasBeenRaised = true;
             timer.Tick(0.5f);
 
-            Assert.IsFalse(eventHasBeenRaised);
+            eventHasBeenRaised.Should().BeFalse();
         }
     }
 }
