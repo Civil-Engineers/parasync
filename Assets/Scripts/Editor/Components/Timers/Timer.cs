@@ -1,6 +1,6 @@
 using System;
 
-namespace Parasync.Runtime.Components.Timers
+namespace Parasync.Editor.Components.Timers
 {
     public class Timer
     {

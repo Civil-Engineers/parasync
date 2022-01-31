@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
-using Parasync.Runtime.Components.Timers;
+using Parasync.Editor;
+using Parasync.Editor.Components.Timers;
 
 namespace Parasync.Runtime.UI
 {
@@ -23,7 +24,7 @@ namespace Parasync.Runtime.UI
 
         private void Awake()
         {
-            _timer = new Timer(durationPerIteration);
+            _timer = A.Timer.WithDuration(durationPerIteration);
             _totalIterationsPerTurn = player1Slots.Length;
             _currActionSlot = 0;
 
